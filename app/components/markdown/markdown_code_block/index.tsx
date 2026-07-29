@@ -41,7 +41,6 @@ const getStyleSheet = makeStyleSheetFromTheme((theme) => {
             flexDirection: 'row',
         },
         code: {
-            flexDirection: 'row',
             overflow: 'scroll', // Doesn't actually cause a scrollbar, but stops text from wrapping
         },
         plusMoreLinesText: {

@@ -39,7 +39,9 @@ function createNativeElement({node, stylesheet, key, defaultColor, fontFamily, f
     }
 
     if (type === 'text') {
-        return value;
+        // Strip trailing newline added by react-syntax-highlighter's processLines
+        // to prevent double line breaks when CodeHighlightRenderer adds '\n' between rows
+        return value.replace(/\n$/, '');
     } else if (tagName) {
         if (properties.style?.display) {
             properties.style.display = 'flex';
@@ -96,6 +98,7 @@ const CodeHighlightRenderer = ({
     selectionColor,
     stylesheet,
 }: Props) => {
+    // Build the content array: each row becomes a Text element, with '\n' between rows
     const content = rows.map((row, index) => {
         const elements = createNativeElement({
             node: row,
